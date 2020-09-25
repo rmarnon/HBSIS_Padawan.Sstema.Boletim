@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30517.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HBSIS_Padawan.Sistema.Boletim", "HBSIS_Padawan.Sistema.Boletim\HBSIS_Padawan.Sistema.Boletim.csproj", "{81A71083-252E-4AF1-B5D1-9BE6C1A343A9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81A71083-252E-4AF1-B5D1-9BE6C1A343A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81A71083-252E-4AF1-B5D1-9BE6C1A343A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81A71083-252E-4AF1-B5D1-9BE6C1A343A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81A71083-252E-4AF1-B5D1-9BE6C1A343A9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4B599551-DBF7-457C-A888-4647292CAADC}
+	EndGlobalSection
+EndGlobal
