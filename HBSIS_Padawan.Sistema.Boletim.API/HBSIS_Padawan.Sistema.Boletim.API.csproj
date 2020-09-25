@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Controllers\AdministradorController.cs~RF3126c593.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HBSIS_Padawan.Sistema.Boletim.Models\HBSIS_Padawan.Sistema.Boletim.Models.csproj" />
+    <ProjectReference Include="..\HBSIS_Padawan.Sistema.Boletim.Repository\HBSIS_Padawan.Sistema.Boletim.Repository.csproj" />
+  </ItemGroup>
+
+
+</Project>
