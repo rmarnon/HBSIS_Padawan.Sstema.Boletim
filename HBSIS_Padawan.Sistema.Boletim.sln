@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30517.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HBSIS_Padawan.Sistema.Boletim", "HBSIS_Padawan.Sistema.Boletim\HBSIS_Padawan.Sistema.Boletim.csproj", "{81A71083-252E-4AF1-B5D1-9BE6C1A343A9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HBSIS_Padawan.Sistema.Boletim.Models", "HBSIS_Padawan.Sistema.Boletim.Models\HBSIS_Padawan.Sistema.Boletim.Models.csproj", "{DF64C0CB-61B8-4454-8640-6C9FEB6FE0CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{81A71083-252E-4AF1-B5D1-9BE6C1A343A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81A71083-252E-4AF1-B5D1-9BE6C1A343A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81A71083-252E-4AF1-B5D1-9BE6C1A343A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF64C0CB-61B8-4454-8640-6C9FEB6FE0CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF64C0CB-61B8-4454-8640-6C9FEB6FE0CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF64C0CB-61B8-4454-8640-6C9FEB6FE0CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF64C0CB-61B8-4454-8640-6C9FEB6FE0CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
