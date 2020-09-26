@@ -21,7 +21,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.Validations
 
             RuleFor(x => x.Nascimento)
                 .NotEmpty().WithMessage("Campo 'Data' deve ser informado")
-                .When(x => x.Nascimento < new DateTime(2002, 01, 01)).WithMessage("Data de nascimento não pode ser maior que 01/01/2002");
+                .Must(NascimentoValidation.Validate).WithMessage("Data de nascimento não pode ser maior que 01/01/2002");
 
             RuleFor(x => x.Cpf)
                 .NotEmpty().WithMessage("Campo 'CPF' deve ser informado")

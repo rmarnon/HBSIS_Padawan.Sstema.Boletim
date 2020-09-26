@@ -2,11 +2,14 @@
 {
     public static class CharsValidate
     {
-        public static bool Validate(string entrada)
+        public static bool Validate(string letras)
         {
             bool validar = false;
 
-            foreach (var letra in entrada)
+            if (letras is null)
+                return validar;
+
+            foreach (var letra in letras)
             {
                 validar = !char.IsDigit(letra);
 

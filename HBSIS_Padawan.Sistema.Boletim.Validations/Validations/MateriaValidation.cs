@@ -20,11 +20,12 @@ namespace HBSIS_Padawan.Sistema.Boletim.Validations
 
             RuleFor(x => x.Cadastro)
                 .NotEmpty().WithMessage("Data de cadastro deve ser informado")
-                .When(x => x.Cadastro < DateAndTime.Now).WithMessage("Data de cadastro não pode ser datas futuras");
+                .Must(CadastroValidation.Validate).WithMessage("Data de cadastro não pode ser datas futuras");
 
             RuleFor(x => x.Status)
-                .NotEmpty().WithMessage("Status da matéria deve ser informado")
-                .When(x => x.Status == Status.Ativo || x.Status == Status.Inativo).WithMessage("Status permitidos [Ativo|Inativo]");
+                .IsInEnum().WithMessage("Status informado não é válido")
+                .NotNull().WithMessage("Status da matéria deve ser informado")
+                .Must(StatusMateriaValidation.Validate).WithMessage("Status permitidos [Ativo|Inativo]");
         }
     }
 }

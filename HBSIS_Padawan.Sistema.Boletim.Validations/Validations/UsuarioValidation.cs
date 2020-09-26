@@ -14,6 +14,10 @@ namespace HBSIS_Padawan.Sistema.Boletim.Validations
             RuleFor(x => x.Senha)
                 .NotEmpty().WithMessage("Senha deve ser informada!")
                 .Length(8, 50).WithMessage("Senha deve ter no mínimo 8 e no maximo 50 caracteres");
+
+            RuleFor(x => x.Tipo)
+                .IsInEnum().WithMessage("Tipo do usuário informado é inválido")
+                 .NotNull().WithMessage("Tipo do usuário deve ser informado");
         }
     }
 }
