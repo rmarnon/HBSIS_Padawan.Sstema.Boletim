@@ -61,7 +61,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.Repository.Migrations
                     CursoId = table.Column<long>(nullable: false),
                     Nome = table.Column<string>(maxLength: 20, nullable: false),
                     Sobrenome = table.Column<string>(maxLength: 20, nullable: false),
-                    Cpf = table.Column<long>(nullable: false),
+                    Cpf = table.Column<string>(nullable: false),
                     Nascimento = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>

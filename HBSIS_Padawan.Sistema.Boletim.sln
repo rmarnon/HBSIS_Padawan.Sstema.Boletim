@@ -9,6 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HBSIS_Padawan.Sistema.Bolet
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HBSIS_Padawan.Sistema.Boletim.Repository", "HBSIS_Padawan.Sistema.Boletim.Repository\HBSIS_Padawan.Sistema.Boletim.Repository.csproj", "{2BA12E8C-1D08-4D84-B6C1-433D8206F4E0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HBSIS_Padawan.Sistema.Boletim.Util", "HBSIS_Padawan.Sistema.Boletim.Util\HBSIS_Padawan.Sistema.Boletim.Util.csproj", "{85C322C1-BD31-4114-8725-ADE24F0EDE29}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HBSIS_Padawan.Sistema.Boletim.Validations", "HBSIS_Padawan.Sistema.Boletim.Validations\HBSIS_Padawan.Sistema.Boletim.Validations.csproj", "{D844E9F6-F168-4AC3-B8B7-894C5A70220C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HBSIS_Padawan.Sistema.Boletim.Tests", "HBSIS_Padawan.Sistema.Boletim.Tests\HBSIS_Padawan.Sistema.Boletim.Tests.csproj", "{104DB863-5567-4E59-9EAA-970FA6872FC1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +33,18 @@ Global
 		{2BA12E8C-1D08-4D84-B6C1-433D8206F4E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2BA12E8C-1D08-4D84-B6C1-433D8206F4E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2BA12E8C-1D08-4D84-B6C1-433D8206F4E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85C322C1-BD31-4114-8725-ADE24F0EDE29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85C322C1-BD31-4114-8725-ADE24F0EDE29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85C322C1-BD31-4114-8725-ADE24F0EDE29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85C322C1-BD31-4114-8725-ADE24F0EDE29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D844E9F6-F168-4AC3-B8B7-894C5A70220C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D844E9F6-F168-4AC3-B8B7-894C5A70220C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D844E9F6-F168-4AC3-B8B7-894C5A70220C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D844E9F6-F168-4AC3-B8B7-894C5A70220C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{104DB863-5567-4E59-9EAA-970FA6872FC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{104DB863-5567-4E59-9EAA-970FA6872FC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{104DB863-5567-4E59-9EAA-970FA6872FC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{104DB863-5567-4E59-9EAA-970FA6872FC1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

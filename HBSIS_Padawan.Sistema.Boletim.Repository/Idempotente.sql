@@ -9,7 +9,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [Boletim_Migrations_History] WHERE [MigrationId] = N'20200925184517_FirstMigration')
+IF NOT EXISTS(SELECT * FROM [Boletim_Migrations_History] WHERE [MigrationId] = N'20200926030501_FirstMigration')
 BEGIN
     CREATE TABLE [Cursos] (
         [Id] bigint NOT NULL IDENTITY,
@@ -21,7 +21,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [Boletim_Migrations_History] WHERE [MigrationId] = N'20200925184517_FirstMigration')
+IF NOT EXISTS(SELECT * FROM [Boletim_Migrations_History] WHERE [MigrationId] = N'20200926030501_FirstMigration')
 BEGIN
     CREATE TABLE [Materias] (
         [Id] bigint NOT NULL IDENTITY,
@@ -35,7 +35,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [Boletim_Migrations_History] WHERE [MigrationId] = N'20200925184517_FirstMigration')
+IF NOT EXISTS(SELECT * FROM [Boletim_Migrations_History] WHERE [MigrationId] = N'20200926030501_FirstMigration')
 BEGIN
     CREATE TABLE [Usuarios] (
         [Id] bigint NOT NULL IDENTITY,
@@ -48,14 +48,14 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [Boletim_Migrations_History] WHERE [MigrationId] = N'20200925184517_FirstMigration')
+IF NOT EXISTS(SELECT * FROM [Boletim_Migrations_History] WHERE [MigrationId] = N'20200926030501_FirstMigration')
 BEGIN
     CREATE TABLE [Alunos] (
         [Id] bigint NOT NULL IDENTITY,
         [CursoId] bigint NOT NULL,
         [Nome] nvarchar(20) NOT NULL,
         [Sobrenome] nvarchar(20) NOT NULL,
-        [Cpf] bigint NOT NULL,
+        [Cpf] nvarchar(max) NOT NULL,
         [Nascimento] datetime2 NOT NULL,
         CONSTRAINT [PK_Alunos] PRIMARY KEY ([Id]),
         CONSTRAINT [FK_Alunos_Cursos_CursoId] FOREIGN KEY ([CursoId]) REFERENCES [Cursos] ([Id]) ON DELETE NO ACTION
@@ -64,7 +64,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [Boletim_Migrations_History] WHERE [MigrationId] = N'20200925184517_FirstMigration')
+IF NOT EXISTS(SELECT * FROM [Boletim_Migrations_History] WHERE [MigrationId] = N'20200926030501_FirstMigration')
 BEGIN
     CREATE TABLE [CursoMateria] (
         [CursoId] bigint NOT NULL,
@@ -79,7 +79,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [Boletim_Migrations_History] WHERE [MigrationId] = N'20200925184517_FirstMigration')
+IF NOT EXISTS(SELECT * FROM [Boletim_Migrations_History] WHERE [MigrationId] = N'20200926030501_FirstMigration')
 BEGIN
     CREATE TABLE [CursoMateriaAluno] (
         [CursoMateriaId] bigint NOT NULL,
@@ -93,31 +93,31 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [Boletim_Migrations_History] WHERE [MigrationId] = N'20200925184517_FirstMigration')
+IF NOT EXISTS(SELECT * FROM [Boletim_Migrations_History] WHERE [MigrationId] = N'20200926030501_FirstMigration')
 BEGIN
     CREATE INDEX [IX_Alunos_CursoId] ON [Alunos] ([CursoId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [Boletim_Migrations_History] WHERE [MigrationId] = N'20200925184517_FirstMigration')
+IF NOT EXISTS(SELECT * FROM [Boletim_Migrations_History] WHERE [MigrationId] = N'20200926030501_FirstMigration')
 BEGIN
     CREATE INDEX [IX_CursoMateria_MateriaId] ON [CursoMateria] ([MateriaId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [Boletim_Migrations_History] WHERE [MigrationId] = N'20200925184517_FirstMigration')
+IF NOT EXISTS(SELECT * FROM [Boletim_Migrations_History] WHERE [MigrationId] = N'20200926030501_FirstMigration')
 BEGIN
     CREATE INDEX [IX_CursoMateriaAluno_CursoMateriaId] ON [CursoMateriaAluno] ([CursoMateriaId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [Boletim_Migrations_History] WHERE [MigrationId] = N'20200925184517_FirstMigration')
+IF NOT EXISTS(SELECT * FROM [Boletim_Migrations_History] WHERE [MigrationId] = N'20200926030501_FirstMigration')
 BEGIN
     INSERT INTO [Boletim_Migrations_History] ([MigrationId], [ProductVersion])
-    VALUES (N'20200925184517_FirstMigration', N'3.1.8');
+    VALUES (N'20200926030501_FirstMigration', N'3.1.8');
 END;
 
 GO

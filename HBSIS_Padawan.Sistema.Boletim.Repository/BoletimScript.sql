@@ -44,7 +44,7 @@ CREATE TABLE [Alunos] (
     [CursoId] bigint NOT NULL,
     [Nome] nvarchar(20) NOT NULL,
     [Sobrenome] nvarchar(20) NOT NULL,
-    [Cpf] bigint NOT NULL,
+    [Cpf] nvarchar(max) NOT NULL,
     [Nascimento] datetime2 NOT NULL,
     CONSTRAINT [PK_Alunos] PRIMARY KEY ([Id]),
     CONSTRAINT [FK_Alunos_Cursos_CursoId] FOREIGN KEY ([CursoId]) REFERENCES [Cursos] ([Id]) ON DELETE NO ACTION
@@ -88,7 +88,7 @@ CREATE INDEX [IX_CursoMateriaAluno_CursoMateriaId] ON [CursoMateriaAluno] ([Curs
 GO
 
 INSERT INTO [Boletim_Migrations_History] ([MigrationId], [ProductVersion])
-VALUES (N'20200925184517_FirstMigration', N'3.1.8');
+VALUES (N'20200926030501_FirstMigration', N'3.1.8');
 
 GO
 

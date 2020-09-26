@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HBSIS_Padawan.Sistema.Boletim.Repository.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20200925184517_FirstMigration")]
+    [Migration("20200926030501_FirstMigration")]
     partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,8 +28,9 @@ namespace HBSIS_Padawan.Sistema.Boletim.Repository.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long>("Cpf")
-                        .HasColumnType("bigint");
+                    b.Property<string>("Cpf")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<long>("CursoId")
                         .HasColumnType("bigint");

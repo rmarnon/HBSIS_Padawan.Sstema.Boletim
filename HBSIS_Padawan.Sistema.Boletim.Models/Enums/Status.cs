@@ -4,7 +4,6 @@
     {        
         Ativo,
         Inativo,
-        Concluido,
-        Pendente
+        Concluido        
     }
 }

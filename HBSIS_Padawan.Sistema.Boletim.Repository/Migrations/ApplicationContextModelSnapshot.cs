@@ -26,8 +26,9 @@ namespace HBSIS_Padawan.Sistema.Boletim.Repository.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long>("Cpf")
-                        .HasColumnType("bigint");
+                    b.Property<string>("Cpf")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<long>("CursoId")
                         .HasColumnType("bigint");
