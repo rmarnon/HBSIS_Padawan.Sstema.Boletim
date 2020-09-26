@@ -24,12 +24,12 @@ namespace HBSIS_Padawan.Sistema.Boletim.API
 
             services.AddSwaggerGen(s =>
             {
-                s.SwaggerDoc("v1", new OpenApiInfo
+                s.SwaggerDoc("V1", new OpenApiInfo
                 {
                     Title = "HBSIS_Padawan Sistema Boletim",
-                    Version = "v1"
+                    Version = "V1"
                 });
-            });           
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,9 +52,9 @@ namespace HBSIS_Padawan.Sistema.Boletim.API
             });
 
             app.UseSwagger();
-            app.UseSwaggerUI(s =>
+            app.UseSwaggerUI( s => 
             {
-                s.SwaggerEndpoint("/swagger/v1/swagger.json", "HBSIS_Padawan Sistema Boletim - API");
+                s.SwaggerEndpoint("/swagger/V1/swagger.json", "HBSIS_Padawan Sistema Boletim");
                 s.DocExpansion(DocExpansion.None);
             });
         }

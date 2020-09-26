@@ -17,9 +17,6 @@ namespace HBSIS_Padawan.Sistema.Boletim.Validations
             RuleFor(x => x.Situacao)
                 .NotEmpty().WithMessage("Situação do curso não foi informado")
                 .When(x => x.Situacao == Status.Ativo).WithMessage("Cadastro permitido apenas para matérias com status 'Ativa'");
-
-            RuleFor(x => x.Disciplinas)
-                .NotEmpty().WithMessage("Cadastro de curso está condicionado a ter pelo menos uma disciplina");                
         }
     }
 }

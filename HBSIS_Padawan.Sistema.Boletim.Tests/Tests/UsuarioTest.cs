@@ -111,7 +111,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.Tests
             var validation = new UsuarioValidation();
             var teste = validation.Validate(user);
 
-            Assert.AreEqual("Aluno",user.Tipo.ToString());
+            Assert.AreEqual("Aluno", user.Tipo.ToString());
         }
     }
 }

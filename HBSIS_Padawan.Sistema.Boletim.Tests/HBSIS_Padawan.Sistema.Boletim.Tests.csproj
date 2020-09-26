@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HBSIS_Padawan.Sistema.Boletim.Models\HBSIS_Padawan.Sistema.Boletim.Models.csproj" />
     <ProjectReference Include="..\HBSIS_Padawan.Sistema.Boletim.Validations\HBSIS_Padawan.Sistema.Boletim.Validations.csproj" />
   </ItemGroup>
 

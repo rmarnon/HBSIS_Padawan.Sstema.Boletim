@@ -1,17 +1,19 @@
 ﻿using HBSIS_Padawan.Sistema.Boletim.Models;
+using HBSIS_Padawan.Sistema.Boletim.Models.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 
-namespace HBSIS_Padawan.Sistema.Boletim.Repository.Data
+namespace HBSIS_Padawan.Sistema.Boletim.Repositories.Data
 {
     public class ApplicationContext : DbContext
     {
         public DbSet<Aluno> Alunos { get; set; }
-        public DbSet<Materia> Materias { get; set; }
         public DbSet<Curso> Cursos { get; set; }
+        public DbSet<Materia> Materias { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
-        public DbSet<CursoMateria> Disciplinas { get; set; }
-        public DbSet<CursoMateriaAluno> AlunoNotas { get; set; }
+        public DbSet<AlunoCurso> AlunosCursos { get; set; }
+        public DbSet<CursoMateria> CursosMaterias { get; set; }
+        public DbSet<AlunoMateria> AlunosMateria { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -1,8 +1,6 @@
 ﻿using FluentValidation;
 using HBSIS_Padawan.Sistema.Boletim.Models;
-using HBSIS_Padawan.Sistema.Boletim.Models.Enums;
 using HBSIS_Padawan.Sistema.Boletim.Validations.Rules;
-using Microsoft.VisualBasic;
 
 namespace HBSIS_Padawan.Sistema.Boletim.Validations
 {

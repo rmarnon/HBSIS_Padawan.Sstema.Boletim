@@ -1,8 +1,6 @@
 ﻿using FluentValidation;
 using HBSIS_Padawan.Sistema.Boletim.Models;
-using HBSIS_Padawan.Sistema.Boletim.Models.Enums;
 using HBSIS_Padawan.Sistema.Boletim.Validations.Rules;
-using System;
 
 namespace HBSIS_Padawan.Sistema.Boletim.Validations
 {
@@ -26,10 +24,6 @@ namespace HBSIS_Padawan.Sistema.Boletim.Validations
             RuleFor(x => x.Cpf)
                 .NotEmpty().WithMessage("Campo 'CPF' deve ser informado")
                 .Must(CPFValidate.Validate).WithMessage("CPF Inválido!");
-
-            RuleFor(x => x.Curso)
-                .NotEmpty().WithMessage("Curso deve ser informado")
-                .Must(x => x.Situacao == Status.Ativo).WithMessage("Aluno só pode ser matriculado em cursos com status 'Ativo'");
         }
     }
 }
