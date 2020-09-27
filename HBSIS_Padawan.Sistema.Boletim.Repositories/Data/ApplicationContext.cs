@@ -1,5 +1,4 @@
 ﻿using HBSIS_Padawan.Sistema.Boletim.Models;
-using HBSIS_Padawan.Sistema.Boletim.Models.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 

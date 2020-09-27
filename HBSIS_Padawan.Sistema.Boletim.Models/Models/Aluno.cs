@@ -1,5 +1,4 @@
-﻿using HBSIS_Padawan.Sistema.Boletim.Models.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace HBSIS_Padawan.Sistema.Boletim.Models

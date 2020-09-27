@@ -1,4 +1,4 @@
-﻿namespace HBSIS_Padawan.Sistema.Boletim.Models.Models
+﻿namespace HBSIS_Padawan.Sistema.Boletim.Models
 {
     public class AlunoMateria
     {
