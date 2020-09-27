@@ -22,7 +22,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.Validations
 
             RuleFor(x => x.Status)
                 .IsInEnum().WithMessage("Status informado não é válido")
-                .NotNull().WithMessage("Status da matéria deve ser informado")
+                .NotEmpty().WithMessage("Status da matéria deve ser informado")
                 .Must(StatusMateriaValidation.Validate).WithMessage("Status permitidos [Ativo|Inativo]");
         }
     }

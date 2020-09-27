@@ -14,7 +14,8 @@ namespace HBSIS_Padawan.Sistema.Boletim.Tests
             Usuario user = new Usuario
             {
                 Login = "Teste user",
-                Senha = "12345678910"
+                Senha = "12345678910",
+                Tipo = TipoUsuario.Administrador
             };
 
             var validation = new UsuarioValidation();
@@ -29,7 +30,9 @@ namespace HBSIS_Padawan.Sistema.Boletim.Tests
             Usuario user = new Usuario
             {
                 Login = "",
-                Senha = "12345678910"
+                Senha = "12345678910",
+                Tipo = TipoUsuario.Professor
+                
             };
 
             var validation = new UsuarioValidation();
@@ -39,12 +42,13 @@ namespace HBSIS_Padawan.Sistema.Boletim.Tests
         }
 
         [TestMethod]
-        public void Testa_Senha_Menos_Caracteres()
+        public void Testa_Senha_Menos_Que_8_Caracteres()
         {
             Usuario user = new Usuario
             {
                 Login = "Teste < 8 caracteres",
-                Senha = "1234567"
+                Senha = "1234567",
+                Tipo = TipoUsuario.Administrador
             };
 
             var validation = new UsuarioValidation();
@@ -59,7 +63,8 @@ namespace HBSIS_Padawan.Sistema.Boletim.Tests
             Usuario user = new Usuario
             {
                 Login = null,
-                Senha = "1234567890"
+                Senha = "1234567890",
+                Tipo = TipoUsuario.Aluno
             };
 
             var validation = new UsuarioValidation();
@@ -74,7 +79,8 @@ namespace HBSIS_Padawan.Sistema.Boletim.Tests
             Usuario user = new Usuario
             {
                 Login = "Teste senha null",
-                Senha = null
+                Senha = null,
+                Tipo = TipoUsuario.Professor
             };
 
             var validation = new UsuarioValidation();
@@ -99,7 +105,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.Tests
         }
 
         [TestMethod]
-        public void Testa_Tipo_Usuario_Aluno()
+        public void Testa_Tipo_Usuario_Igual_Tipo()
         {
             Usuario user = new Usuario
             {
@@ -112,6 +118,67 @@ namespace HBSIS_Padawan.Sistema.Boletim.Tests
             var teste = validation.Validate(user);
 
             Assert.AreEqual("Aluno", user.Tipo.ToString());
+        }
+
+        [TestMethod]
+        public void Testa_Login_Não_Informado()
+        {
+            Usuario user = new Usuario
+            {               
+                Senha = "1234567890",
+                Tipo = TipoUsuario.Aluno
+            };
+
+            var validation = new UsuarioValidation();
+            var teste = validation.Validate(user);
+
+            Assert.IsFalse(teste.IsValid);
+        }
+
+        [TestMethod]
+        public void Testa_Tipo_Não_Informado()
+        {
+            Usuario user = new Usuario
+            {
+                Login = "Teste user",
+                Senha = "12345678910"             
+            };
+
+            var validation = new UsuarioValidation();
+            var teste = validation.Validate(user);
+
+            Assert.IsFalse(teste.IsValid);
+        }
+
+        [TestMethod]
+        public void Testa_Senha_Não_Informada()
+        {
+            Usuario user = new Usuario
+            {
+                Login = "Teste de Login",
+                Tipo = TipoUsuario.Administrador
+            };
+
+            var validation = new UsuarioValidation();
+            var teste = validation.Validate(user);
+
+            Assert.IsFalse(teste.IsValid);
+        }
+
+        [TestMethod]
+        public void Testa_Senha_Mais50_Caracteres()
+        {
+            Usuario user = new Usuario
+            {
+                Login = "Teste Login",
+                Senha = "TesteSenhaDoUsuarioComMaisDeCinquentaCaracteresEmTeste",
+                Tipo = TipoUsuario.Professor
+            };
+
+            var validation = new UsuarioValidation();
+            var teste = validation.Validate(user);
+
+            Assert.IsFalse(teste.IsValid);
         }
     }
 }

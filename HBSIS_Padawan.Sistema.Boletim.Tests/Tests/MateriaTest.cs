@@ -61,6 +61,22 @@ namespace HBSIS_Padawan.Sistema.Boletim.Tests
         }
 
         [TestMethod]
+        public void Testa_Status_Não_Informado()
+        {
+            var materia = new Materia
+            {
+                Nome = "Teste convert.ToString",
+                Descricao = "Usando Parse",
+                Cadastro = new DateTime(2020, 01, 01)               
+            };
+
+            var validation = new MateriaValidation();
+            var teste = validation.Validate(materia);
+
+            Assert.IsFalse(teste.IsValid);
+        }
+
+        [TestMethod]
         public void Testa_Nome_Vazio()
         {
             var materia = new Materia
@@ -86,6 +102,56 @@ namespace HBSIS_Padawan.Sistema.Boletim.Tests
                 Descricao = "Teste nome null",
                 Cadastro = new DateTime(2020, 01, 01),
                 Status = Status.Ativo
+            };
+
+            var validation = new MateriaValidation();
+            var teste = validation.Validate(materia);
+
+            Assert.IsFalse(teste.IsValid);
+        }
+
+        [TestMethod]
+        public void Testa_Nome_Com_Mais_De_50_Caracteres()
+        {
+            var materia = new Materia
+            {
+                Nome = "TesteNomeDoUsuarioComMaisDeCinquentaCaracteresEmTeste",
+                Descricao = "Teste de estouro de limite",
+                Cadastro = new DateTime(2020, 01, 01),
+                Status = Status.Ativo
+            };
+
+            var validation = new MateriaValidation();
+            var teste = validation.Validate(materia);
+
+            Assert.IsFalse(teste.IsValid);
+        }
+
+        [TestMethod]
+        public void Testa_Nome_Com_Espaços()
+        {
+            var materia = new Materia
+            {
+                Nome = "         ",
+                Descricao = "Teste com espaços",
+                Cadastro = new DateTime(2020, 01, 01),
+                Status = Status.Ativo
+            };
+
+            var validation = new MateriaValidation();
+            var teste = validation.Validate(materia);
+
+            Assert.IsFalse(teste.IsValid);
+        }
+
+        [TestMethod]
+        public void Testa_Nome_Não_Informado()
+        {
+            var materia = new Materia
+            {                
+                Descricao = "Teste sem nome",
+                Cadastro = new DateTime(2020, 01, 01),
+                Status = Status.Inativo
             };
 
             var validation = new MateriaValidation();
@@ -129,6 +195,39 @@ namespace HBSIS_Padawan.Sistema.Boletim.Tests
         }
 
         [TestMethod]
+        public void Testa_Descrição_Empty()
+        {
+            var materia = new Materia
+            {
+                Nome = "Teste Descrição vazio",
+                Descricao = "",
+                Cadastro = new DateTime(2020, 01, 01),
+                Status = Status.Ativo
+            };
+
+            var validation = new MateriaValidation();
+            var teste = validation.Validate(materia);
+
+            Assert.IsFalse(teste.IsValid);
+        }
+
+        [TestMethod]
+        public void Testa_Descrição_Não_Informada()
+        {
+            var materia = new Materia
+            {
+                Nome = "Teste sem descrição",                
+                Cadastro = new DateTime(2020, 01, 01),
+                Status = Status.Ativo
+            };
+
+            var validation = new MateriaValidation();
+            var teste = validation.Validate(materia);
+
+            Assert.IsFalse(teste.IsValid);
+        }
+
+        [TestMethod]
         public void Testa_Data_Futura()
         {
             var materia = new Materia
@@ -146,13 +245,12 @@ namespace HBSIS_Padawan.Sistema.Boletim.Tests
         }
 
         [TestMethod]
-        public void Testa_Usuario_Com_Mais_De_50_Caracteres()
+        public void Testa_Sem_Data()
         {
             var materia = new Materia
             {
-                Nome = "TesteLoginDoUsuarioComMaisDeCinquentaCaracteresEmTeste",
-                Descricao = "Teste de estouro de limite",
-                Cadastro = new DateTime(2020, 01, 01),
+                Nome = "Teste sem data ",
+                Descricao = "Teste no data",                
                 Status = Status.Ativo
             };
 
