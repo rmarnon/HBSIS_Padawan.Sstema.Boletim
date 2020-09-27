@@ -1,7 +1,10 @@
 ﻿using HBSIS_Padawan.Sistema.Boletim.Models;
+using HBSIS_Padawan.Sistema.Boletim.Models.Enums;
 using HBSIS_Padawan.Sistema.Boletim.Validations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace HBSIS_Padawan.Sistema.Boletim.Tests
 {
@@ -16,7 +19,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.Tests
                 Nome = "Teste Nome",
                 Sobrenome = "Teste Sobrenome",
                 Nascimento = new DateTime(1982, 04, 29),
-                Cpf = "05477313617"
+                Cpf = "01234567890"
             };
 
             var validation = new AlunoValidation();
@@ -33,7 +36,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.Tests
                 Nome = null,
                 Sobrenome = "Teste Sobrenome",
                 Nascimento = new DateTime(1982, 04, 29),
-                Cpf = "05477313617"
+                Cpf = "01234567890"
             };
 
             var validation = new AlunoValidation();
@@ -50,7 +53,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.Tests
                 Nome = "",
                 Sobrenome = "Teste Sobrenome",
                 Nascimento = new DateTime(1982, 04, 29),
-                Cpf = "05477313617"
+                Cpf = "01234567890"
             };
 
             var validation = new AlunoValidation();
@@ -67,7 +70,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.Tests
                 Nome = "999999999",
                 Sobrenome = "Teste Sobrenome",
                 Nascimento = new DateTime(1982, 04, 29),
-                Cpf = "05477313617"
+                Cpf = "01234567890"
             };
 
             var validation = new AlunoValidation();
@@ -84,7 +87,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.Tests
                 Nome = "Te",
                 Sobrenome = "Teste Sobrenome",
                 Nascimento = new DateTime(1982, 04, 29),
-                Cpf = "05477313617"
+                Cpf = "01234567890"
             };
 
             var validation = new AlunoValidation();
@@ -101,7 +104,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.Tests
                 Nome = "TestNomeComMaisDeVinteLetras",
                 Sobrenome = "Teste Sobrenome",
                 Nascimento = new DateTime(1982, 04, 29),
-                Cpf = "05477313617"
+                Cpf = "01234567890"
             };
 
             var validation = new AlunoValidation();
@@ -118,7 +121,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.Tests
                 Nome = "Teste",
                 Sobrenome = "TestSobrenomeComMaisDeVinteLetras",
                 Nascimento = new DateTime(1982, 04, 29),
-                Cpf = "05477313617"
+                Cpf = "01234567890"
             };
 
             var validation = new AlunoValidation();
@@ -134,7 +137,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.Tests
             {                
                 Sobrenome = "Teste Sobrenome",
                 Nascimento = new DateTime(1982, 04, 29),
-                Cpf = "05477313617"
+                Cpf = "01234567890"
             };
 
             var validation = new AlunoValidation();
@@ -150,7 +153,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.Tests
             {
                 Nome = "Teste sobrenome",                
                 Nascimento = new DateTime(1982, 04, 29),
-                Cpf = "05477313617"
+                Cpf = "01234567890"
             };
 
             var validation = new AlunoValidation();
@@ -166,7 +169,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.Tests
             {
                 Nome = "Teste Nome",
                 Sobrenome = "Teste Sobrenome",                
-                Cpf = "05477313617"
+                Cpf = "01234567890"
             };
 
             var validation = new AlunoValidation();
@@ -183,7 +186,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.Tests
                 Nome = "Teste nome",
                 Sobrenome = "Teste Sobrenome",
                 Nascimento = new DateTime(2002, 01, 02),
-                Cpf = "05477313617"
+                Cpf = "01234567890"
             };
 
             var validation = new AlunoValidation();
@@ -200,7 +203,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.Tests
                 Nome = "Teste nome",
                 Sobrenome = "Teste Sobrenome",
                 Nascimento = new DateTime(2000, 01, 01),
-                Cpf = "A5477C13617"
+                Cpf = "A5477C13187"
             };
 
             var validation = new AlunoValidation();
@@ -217,7 +220,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.Tests
                 Nome = "Teste nome",
                 Sobrenome = "Teste Sobrenome",
                 Nascimento = new DateTime(2000, 01, 01),
-                Cpf = "054773136179"
+                Cpf = "1234567891011"
             };
 
             var validation = new AlunoValidation();
@@ -234,7 +237,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.Tests
                 Nome = "Teste nome",
                 Sobrenome = "Teste Sobrenome",
                 Nascimento = new DateTime(2000, 01, 01),
-                Cpf = "0547731"
+                Cpf = "012345"
             };
 
             var validation = new AlunoValidation();
@@ -301,7 +304,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.Tests
                 Nome = "Teste nome",
                 Sobrenome = "Teste Sobrenome",
                 Nascimento = new DateTime(2000, 01, 01),
-                Cpf = "054.773.136-17"
+                Cpf = "012.345.678-90"
             };
 
             var validation = new AlunoValidation();
@@ -325,6 +328,223 @@ namespace HBSIS_Padawan.Sistema.Boletim.Tests
             var teste = validation.Validate(aluno);
 
             Assert.IsFalse(teste.IsValid);
+        }
+
+        [TestMethod]
+        public void Testa_Matricula_Curso_Ativo()
+        {
+            var aluno = new Aluno
+            {
+                Nome = "Teste nome",
+                Sobrenome = "Teste Sobrenome",
+                Nascimento = new DateTime(2000, 01, 01),
+                Cpf = "01234567890"
+            };
+
+            var curso = new Curso
+            {
+                Nome = "Teste matricula",
+                Situacao = Status.Ativo
+            };
+
+            aluno.AlunoCursos.Add(new AlunoCurso
+            {
+                Aluno = aluno,
+                Curso = curso
+            });
+
+            var validation = new AlunoValidation();
+            var teste = validation.Validate(aluno);
+
+            Assert.IsTrue(teste.IsValid);
+        }
+
+        [TestMethod]
+        public void Testa_Matricula_Curso_Inativo()
+        {
+            var aluno = new Aluno
+            {
+                Nome = "Teste nome",
+                Sobrenome = "Teste Sobrenome",
+                Nascimento = new DateTime(2000, 01, 01),
+                Cpf = "01234567890"
+            };
+
+            var curso = new Curso
+            {
+                Nome = "Teste matricula",
+                Situacao = Status.Inativo
+            };
+
+            aluno.AlunoCursos.Add(new AlunoCurso
+            {
+                Aluno = aluno,
+                Curso = curso
+            });
+
+            var validation = new AlunoValidation();
+            var teste = validation.Validate(aluno);
+
+            Assert.IsFalse(teste.IsValid);
+        }
+
+        [TestMethod]
+        public void Testa_Inserir_Nota_Maxima()
+        {
+            var aluno = new Aluno
+            {
+                Nome = "Teste nome",
+                Sobrenome = "Teste Sobrenome",
+                Nascimento = new DateTime(2000, 01, 01),
+                Cpf = "01234567890"
+            };
+
+            var materia = new Materia
+            {
+                Nome = "Teste materia",
+                Descricao = "Teste descricao",
+                Status = Status.Ativo,
+                Cadastro = new DateTime(2020, 06, 07)
+            };
+
+            aluno.AlunoMaterias.Add(new AlunoMateria 
+            {
+                Aluno = aluno,
+                Materia = materia,
+                Nota = 100.0
+            });
+
+            var validation = new AlunoValidation();
+            var teste = validation.Validate(aluno);
+
+            Assert.IsTrue(teste.IsValid);
+        }
+
+        [TestMethod]
+        public void Testa_Inserir_Nota_Zero()
+        {
+            var aluno = new Aluno
+            {
+                Nome = "Teste nome",
+                Sobrenome = "Teste Sobrenome",
+                Nascimento = new DateTime(2000, 01, 01),
+                Cpf = "01234567890"
+            };
+
+            var materia = new Materia
+            {
+                Nome = "Teste materia",
+                Descricao = "Teste descricao",
+                Status = Status.Ativo,
+                Cadastro = new DateTime(2020, 06, 07)
+            };
+
+            aluno.AlunoMaterias.Add(new AlunoMateria
+            {
+                Aluno = aluno,
+                Materia = materia,
+                Nota = 0.0
+            });
+
+            var validation = new AlunoValidation();
+            var teste = validation.Validate(aluno);
+
+            Assert.IsTrue(teste.IsValid);
+        }
+
+        [TestMethod]
+        public void Testa_Inserir_Nota_Negativa()
+        {
+            var aluno = new Aluno
+            {
+                Nome = "Teste nome",
+                Sobrenome = "Teste Sobrenome",
+                Nascimento = new DateTime(2000, 01, 01),
+                Cpf = "01234567890"
+            };
+
+            var materia = new Materia
+            {
+                Nome = "Teste materia",
+                Descricao = "Teste descricao",
+                Status = Status.Ativo,
+                Cadastro = new DateTime(2020, 06, 07)
+            };
+
+            aluno.AlunoMaterias.Add(new AlunoMateria
+            {
+                Aluno = aluno,
+                Materia = materia,
+                Nota = - 1.0
+            });
+
+            var validation = new AlunoValidation();
+            var teste = validation.Validate(aluno);
+
+            Assert.IsFalse(teste.IsValid);
+        }
+
+        [TestMethod]
+        public void Testa_Inserir_Nota_Maior_Que_100()
+        {
+            var aluno = new Aluno
+            {
+                Nome = "Teste nome",
+                Sobrenome = "Teste Sobrenome",
+                Nascimento = new DateTime(2000, 01, 01),
+                Cpf = "01234567890"
+            };
+
+            var materia = new Materia
+            {
+                Nome = "Teste materia",
+                Descricao = "Teste descricao",
+                Status = Status.Ativo,
+                Cadastro = new DateTime(2020, 06, 07)
+            };
+
+            aluno.AlunoMaterias.Add(new AlunoMateria
+            {
+                Aluno = aluno,
+                Materia = materia,
+                Nota = 101.0
+            });
+
+            var validation = new AlunoValidation();
+            var teste = validation.Validate(aluno);
+
+            Assert.IsFalse(teste.IsValid);
+        }
+
+        [TestMethod]
+        public void Testa_Nota_Não_Informada_Padrao_Zero()
+        {
+            var aluno = new Aluno
+            {
+                Nome = "Teste nome",
+                Sobrenome = "Teste Sobrenome",
+                Nascimento = new DateTime(2000, 01, 01),
+                Cpf = "01234567890"
+            };
+
+            var materia = new Materia
+            {
+                Nome = "Teste materia",
+                Descricao = "Teste descricao",
+                Status = Status.Ativo,
+                Cadastro = new DateTime(2020, 06, 07)
+            };
+
+            aluno.AlunoMaterias.Add(new AlunoMateria
+            {
+                Aluno = aluno,
+                Materia = materia                
+            });
+
+            var validation = new AlunoValidation();
+            var teste = validation.Validate(aluno);
+                       
+            Assert.IsTrue(teste.IsValid);
         }
     }
 }

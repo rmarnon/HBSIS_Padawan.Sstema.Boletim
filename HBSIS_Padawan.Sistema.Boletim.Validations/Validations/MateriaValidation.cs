@@ -1,6 +1,8 @@
 ﻿using FluentValidation;
 using HBSIS_Padawan.Sistema.Boletim.Models;
+using HBSIS_Padawan.Sistema.Boletim.Models.Enums;
 using HBSIS_Padawan.Sistema.Boletim.Validations.Rules;
+using System;
 
 namespace HBSIS_Padawan.Sistema.Boletim.Validations
 {
@@ -18,12 +20,12 @@ namespace HBSIS_Padawan.Sistema.Boletim.Validations
 
             RuleFor(x => x.Cadastro)
                 .NotEmpty().WithMessage("Data de cadastro deve ser informado")
-                .Must(CadastroValidation.Validate).WithMessage("Data de cadastro não pode ser datas futuras");
+                .Must(x => x.Date < DateTime.Now).WithMessage("Data de cadastro não pode ser datas futuras");
 
             RuleFor(x => x.Status)
                 .IsInEnum().WithMessage("Status informado não é válido")
                 .NotEmpty().WithMessage("Status da matéria deve ser informado")
-                .Must(StatusMateriaValidation.Validate).WithMessage("Status permitidos [Ativo|Inativo]");
+                .Must(x => x.Equals(Status.Ativo) || x.Equals(Status.Inativo)).WithMessage("Status permitidos [Ativo|Inativo]");
         }
     }
 }

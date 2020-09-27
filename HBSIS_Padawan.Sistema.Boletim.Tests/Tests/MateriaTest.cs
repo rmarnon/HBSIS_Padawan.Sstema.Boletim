@@ -115,7 +115,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.Tests
         {
             var materia = new Materia
             {
-                Nome = "TesteNomeDoUsuarioComMaisDeCinquentaCaracteresEmTeste",
+                Nome = "TesteNomeDaMateriaComMaisDeCinquentaCaracteresEmTeste",
                 Descricao = "Teste de estouro de limite",
                 Cadastro = new DateTime(2020, 01, 01),
                 Status = Status.Ativo
