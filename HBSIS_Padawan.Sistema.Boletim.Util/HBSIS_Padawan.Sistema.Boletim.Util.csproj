@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HBSIS_Padawan.Sistema.Boletim.Models\HBSIS_Padawan.Sistema.Boletim.Models.csproj" />
+  </ItemGroup>
+
 </Project>
