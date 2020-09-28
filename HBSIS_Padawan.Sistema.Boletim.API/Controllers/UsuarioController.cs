@@ -1,42 +1,36 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+﻿using HBSIS_Padawan.Sistema.Boletim.BusinessRule.Interfaces;
+using HBSIS_Padawan.Sistema.Boletim.Models;
+using HBSIS_Padawan.Sistema.Boletim.Util;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HBSIS_Padawan.Sistema.Boletim.API.Controllers
-{    
+{
     [ApiController]
     [Route("Usuario")]
     public class UsuarioController : ControllerBase
     {
-        // GET: api/<UsuarioController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        private readonly IUser usuario;        
 
-        // GET api/<UsuarioController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+        public UsuarioController(IUser user) => usuario = user;
 
-        // POST api/<UsuarioController>
         [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
+        [Route("Conecta")]
+        public ActionResult Conectar(Usuario user) => Ok(usuario.Conectar(user.Login, user.Senha));        
 
-        // PUT api/<UsuarioController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+        [HttpPost]
+        [Route("Cadastra")]
+        public ActionResult Cadastrar(Usuario user) => Ok(usuario.Cadastrar(user.Login, user.Senha, user.Tipo));        
 
-        // DELETE api/<UsuarioController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        [HttpDelete]
+        [Route("Deleta")]
+        public ActionResult Deletar(string login, string senha) => Ok(usuario.Excluir(login, senha));
+
+        [HttpPut]
+        [Route("AlteraSenha")]
+        public ActionResult AlteraSenha(string login, string senha, string nova) => Ok(usuario.AlteraSenha(login, senha, nova));
+
+        [HttpPut]
+        [Route("AlteraLogin")]
+        public ActionResult AlteraLogin(string login, string novo, string senha) => Ok(usuario.AlteraSenha(login, novo, senha));
     }
 }

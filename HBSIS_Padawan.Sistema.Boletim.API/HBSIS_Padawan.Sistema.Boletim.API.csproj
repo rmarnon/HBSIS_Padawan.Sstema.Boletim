@@ -5,7 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Controllers\UsuarioController.cs~RFf0c3299.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HBSIS_Padawan.Sistema.Boletim.BusinessRule\HBSIS_Padawan.Sistema.Boletim.BusinessRule.csproj" />
+    <ProjectReference Include="..\HBSIS_Padawan.Sistema.Boletim.Models\HBSIS_Padawan.Sistema.Boletim.Models.csproj" />
+    <ProjectReference Include="..\HBSIS_Padawan.Sistema.Boletim.Util\HBSIS_Padawan.Sistema.Boletim.Util.csproj" />
   </ItemGroup>
 
 
