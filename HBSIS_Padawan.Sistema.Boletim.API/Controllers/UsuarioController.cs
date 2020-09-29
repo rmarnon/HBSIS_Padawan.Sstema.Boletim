@@ -1,6 +1,5 @@
 ﻿using HBSIS_Padawan.Sistema.Boletim.BusinessRule.Interfaces;
 using HBSIS_Padawan.Sistema.Boletim.Models;
-using HBSIS_Padawan.Sistema.Boletim.Util;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HBSIS_Padawan.Sistema.Boletim.API.Controllers
