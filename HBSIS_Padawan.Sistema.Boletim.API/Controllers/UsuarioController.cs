@@ -26,10 +26,10 @@ namespace HBSIS_Padawan.Sistema.Boletim.API.Controllers
 
         [HttpPut]
         [Route("AlteraSenha")]
-        public ActionResult AlteraSenha(string login, string senha, string nova) => Ok(usuario.AlteraSenha(login, senha, nova));
+        public ActionResult AlteraSenha(string login, string senha, string novaSenha) => Ok(usuario.AlteraSenha(login, senha, novaSenha));
 
         [HttpPut]
         [Route("AlteraLogin")]
-        public ActionResult AlteraLogin(string login, string novo, string senha) => Ok(usuario.AlteraSenha(login, novo, senha));
+        public ActionResult AlteraLogin(string login, string novoLogin, string senha) => Ok(usuario.AlteraSenha(login, novoLogin, senha));
     }
 }
