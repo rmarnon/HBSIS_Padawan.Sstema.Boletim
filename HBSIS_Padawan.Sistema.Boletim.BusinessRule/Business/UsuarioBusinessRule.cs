@@ -23,18 +23,18 @@ namespace HBSIS_Padawan.Sistema.Boletim.BusinessRule
         {
             try
             {
-                var valido = ValidaEntrada(novoLogin, senha);
-
-                if (!valido.IsValid)
-                    return RetornaNaoValido(valido);
-
                 using (db)
                 {
+                    var valido = ValidaEntrada(new Usuario { Login = novoLogin, Senha = senha, Tipo = TipoUsuario.Aluno });                    
+
+                    if (!valido.IsValid)
+                        return RetornaNaoValido(valido);
+
                     user = db.Usuarios.FirstOrDefault(x => x.Login == login);
 
                     if (user is null)
                         return RetornaUsuarioNaoEncontrado();
-
+                    
                     if (user.Senha != senha)
                         return RetornaSenhaInvalida();
 
@@ -54,13 +54,13 @@ namespace HBSIS_Padawan.Sistema.Boletim.BusinessRule
         {
             try
             {
-                var valido = ValidaEntrada(login, novaSenha);
-
-                if (!valido.IsValid)
-                    return RetornaNaoValido(valido);
-
                 using (db)
                 {
+                    var valido = ValidaEntrada(new Usuario { Login = login, Senha = novaSenha });
+
+                    if (!valido.IsValid)
+                        return RetornaNaoValido(valido);
+
                     user = db.Usuarios.FirstOrDefault(x => x.Login == login);
 
                     if (user is null)
@@ -123,17 +123,17 @@ namespace HBSIS_Padawan.Sistema.Boletim.BusinessRule
         {
             try
             {
-                var valido = ValidaEntrada(login, senha);
-
-                if (!valido.IsValid)
-                    return RetornaNaoValido(valido);
-
                 using (db)
                 {
                     user = db.Usuarios.FirstOrDefault(x => x.Login == login);
 
                     if (user is null)
                         return RetornaUsuarioNaoEncontrado();
+
+                    var valido = ValidaEntrada(new Usuario { Login = login, Senha = senha, Tipo = user.Tipo });
+
+                    if (!valido.IsValid)
+                        return RetornaNaoValido(valido);
 
                     if (user.Senha != senha)
                         return RetornaSenhaInvalida();
@@ -151,17 +151,17 @@ namespace HBSIS_Padawan.Sistema.Boletim.BusinessRule
         {
             try
             {
-                var valido = ValidaEntrada(login, senha);
-
-                if (!valido.IsValid)
-                    return RetornaNaoValido(valido);
-
                 using (db)
                 {
                     user = db.Usuarios.FirstOrDefault(x => x.Login == login);
 
                     if (user is null)
                         return RetornaUsuarioNaoEncontrado();
+
+                    var valido = ValidaEntrada(new Usuario { Login = login, Senha = senha, Tipo = user.Tipo });
+
+                    if (!valido.IsValid)
+                        return RetornaNaoValido(valido);
 
                     if (user.Senha != senha)
                         return RetornaSenhaInvalida();
@@ -186,20 +186,8 @@ namespace HBSIS_Padawan.Sistema.Boletim.BusinessRule
             return result;
         }
 
-        private static ValidationResult ValidaEntrada(string login, string senha)
-        {
-            var validation = new UsuarioValidation();
-            var valido = validation.Validate(new Usuario { Login = login, Senha = senha });
-            return valido;
-        }
-
-        private static ValidationResult ValidaEntrada(Usuario usuario)
-        {
-            var validation = new UsuarioValidation();
-            var valido = validation.Validate(usuario);
-            return valido;
-        }
-
+        private static ValidationResult ValidaEntrada(Usuario usuario) => new UsuarioValidation().Validate(usuario);
+             
         private Result<Usuario> RetornaNaoValido(ValidationResult valido)
         {
             result.Error = true;
