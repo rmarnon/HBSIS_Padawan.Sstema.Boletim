@@ -1,3 +1,6 @@
+using HBSIS_Padawan.Sistema.Boletim.BusinessRule;
+using HBSIS_Padawan.Sistema.Boletim.BusinessRule.Interfaces;
+using HBSIS_Padawan.Sistema.Boletim.Repositories.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -30,6 +33,10 @@ namespace HBSIS_Padawan.Sistema.Boletim.API
                     Version = "V1"
                 });
             });
+
+            services.AddDbContext<ApplicationContext>();
+
+            services.AddTransient<IUser, UsuarioBusinessRule>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

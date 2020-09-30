@@ -1,4 +1,5 @@
-﻿using HBSIS_Padawan.Sistema.Boletim.BusinessRule.Exceptions;
+﻿using FluentValidation.Results;
+using HBSIS_Padawan.Sistema.Boletim.BusinessRule.Exceptions;
 using HBSIS_Padawan.Sistema.Boletim.BusinessRule.Interfaces;
 using HBSIS_Padawan.Sistema.Boletim.Models;
 using HBSIS_Padawan.Sistema.Boletim.Models.Enums;
@@ -14,6 +15,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.BusinessRule
     {
         private readonly ApplicationContext db;
         Result<Usuario> result = new Result<Usuario>();
+        Usuario user = new Usuario();
 
         public UsuarioBusinessRule(ApplicationContext context) => db = context;
 
@@ -21,35 +23,30 @@ namespace HBSIS_Padawan.Sistema.Boletim.BusinessRule
         {
             try
             {
-                var validation = new UsuarioValidation();
-                var valido = validation.Validate(new Usuario { Login = login, Senha = senha });
+                var valido = ValidaEntrada(novoLogin, senha);
+
+                if (!valido.IsValid)
+                    return RetornaNaoValido(valido);
 
                 using (db)
                 {
-                    var user = db.Usuarios.FirstOrDefault(x => x.Login == login && x.Senha == senha);
+                    user = db.Usuarios.FirstOrDefault(x => x.Login == login);
 
-                    if (!valido.IsValid || user is null)
-                    {
-                        result.Error = true;
-                        result.Message.Add(valido.Errors.ToString());
-                        result.Status = HttpStatusCode.BadRequest;
-                        return result;
-                    }
+                    if (user is null)
+                        return RetornaUsuarioNaoEncontrado();
 
-                    user.Login = novoLogin;                    
+                    if (user.Senha != senha)
+                        return RetornaSenhaInvalida();
+
+                    user.Login = novoLogin;
                     db.SaveChanges();
 
-                    result.Data = user;
-                    result.Error = false;
-                    result.Message.Add("Login Alterado");
-                    result.Status = HttpStatusCode.OK;
-                    return result;
-
+                    return RetornaOk();
                 }
             }
             catch (BusinessException e)
             {
-                return ReturnErrors(e);
+                return RetornaErrosDesconhecidos(e);
             }
         }
 
@@ -57,35 +54,30 @@ namespace HBSIS_Padawan.Sistema.Boletim.BusinessRule
         {
             try
             {
-                var validation = new UsuarioValidation();
-                var valido = validation.Validate(new Usuario { Login = login, Senha = senha });
+                var valido = ValidaEntrada(login, novaSenha);
+
+                if (!valido.IsValid)
+                    return RetornaNaoValido(valido);
 
                 using (db)
                 {
-                    Usuario user = db.Usuarios.FirstOrDefault(x => x.Login == login && x.Senha == senha);
+                    user = db.Usuarios.FirstOrDefault(x => x.Login == login);
 
-                    if (!valido.IsValid || user is null)
-                    {
-                        result.Error = true;
-                        result.Message.Add(valido.Errors.ToString());
-                        result.Status = HttpStatusCode.BadRequest;
-                        return result;
-                    }
+                    if (user is null)
+                        return RetornaUsuarioNaoEncontrado();
+
+                    if (user.Senha != senha)
+                        return RetornaSenhaInvalida();
 
                     user.Senha = novaSenha;
                     db.SaveChanges();
 
-                    result.Data = user;
-                    result.Error = false;
-                    result.Message.Add("Senha Alterado");
-                    result.Status = HttpStatusCode.OK;
-                    return result;
-
+                    return RetornaOk();
                 }
             }
-            catch (BusinessException e) 
+            catch (BusinessException e)
             {
-                return ReturnErrors(e);
+                return RetornaErrosDesconhecidos(e);
             }
         }
 
@@ -93,23 +85,14 @@ namespace HBSIS_Padawan.Sistema.Boletim.BusinessRule
         {
             try
             {
-                Usuario user = new Usuario
-                {
-                    Login = login,
-                    Senha = senha,
-                    Tipo = tipo
-                };
+                user.Login = login;
+                user.Senha = senha;
+                user.Tipo = tipo;
 
-                var validation = new UsuarioValidation();
-                var valido = validation.Validate(user);
+                var valido = ValidaEntrada(user);
 
                 if (!valido.IsValid)
-                {
-                    result.Error = true;
-                    result.Message.Add(valido.Errors.ToString());
-                    result.Status = HttpStatusCode.BadRequest;
-                    return result;
-                }
+                    return RetornaNaoValido(valido);
 
                 using (db)
                 {
@@ -118,7 +101,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.BusinessRule
                         if (usuario.Login == login)
                         {
                             result.Error = true;
-                            result.Message.Add("Usuário já esta cadastrado");
+                            result.Message.Add("Usuário já está cadastrado");
                             result.Status = HttpStatusCode.BadRequest;
                             return result;
                         }
@@ -127,16 +110,12 @@ namespace HBSIS_Padawan.Sistema.Boletim.BusinessRule
                     db.Usuarios.Add(user);
                     db.SaveChanges();
 
-                    result.Error = false;
-                    result.Message.Add("Ok");
-                    result.Status = HttpStatusCode.OK;
-                    result.Data = user;
-                    return result;
+                    return RetornaOk();
                 }
             }
-            catch (BusinessException e) 
+            catch (BusinessException e)
             {
-                return ReturnErrors(e);
+                return RetornaErrosDesconhecidos(e);
             }
         }
 
@@ -144,28 +123,27 @@ namespace HBSIS_Padawan.Sistema.Boletim.BusinessRule
         {
             try
             {
+                var valido = ValidaEntrada(login, senha);
+
+                if (!valido.IsValid)
+                    return RetornaNaoValido(valido);
+
                 using (db)
                 {
-                    Usuario user = db.Usuarios.FirstOrDefault(x => x.Login == login && x.Senha == senha);
+                    user = db.Usuarios.FirstOrDefault(x => x.Login == login);
 
                     if (user is null)
-                    {
-                        result.Error = true;
-                        result.Message.Add("Usuário não cadastrado");
-                        result.Status = HttpStatusCode.NotFound;
-                        return result;
-                    }
-                    
-                    result.Error = false;
-                    result.Message.Add("Ok");
-                    result.Status = HttpStatusCode.OK;
-                    result.Data = user;
-                    return result;
+                        return RetornaUsuarioNaoEncontrado();
+
+                    if (user.Senha != senha)
+                        return RetornaSenhaInvalida();
+
+                    return RetornaOk();
                 }
             }
             catch (BusinessException e)
             {
-                return ReturnErrors(e);
+                return RetornaErrosDesconhecidos(e);
             }
         }
 
@@ -173,39 +151,85 @@ namespace HBSIS_Padawan.Sistema.Boletim.BusinessRule
         {
             try
             {
+                var valido = ValidaEntrada(login, senha);
+
+                if (!valido.IsValid)
+                    return RetornaNaoValido(valido);
+
                 using (db)
                 {
-                    Usuario user = db.Usuarios.FirstOrDefault(x => x.Login == login && x.Senha == senha);
+                    user = db.Usuarios.FirstOrDefault(x => x.Login == login);
 
                     if (user is null)
-                    {
-                        result.Error = true;
-                        result.Message.Add("Usuário não cadastrado");
-                        result.Status = HttpStatusCode.NotFound;
-                        return result;
-                    }
+                        return RetornaUsuarioNaoEncontrado();
+
+                    if (user.Senha != senha)
+                        return RetornaSenhaInvalida();
 
                     db.Usuarios.Remove(user);
                     db.SaveChanges();
 
-                    result.Error = false;
-                    result.Message.Add("Usuário removido com sucesso");
-                    result.Status = HttpStatusCode.OK;
-
-                    return result;
+                    return RetornaOk();
                 }
             }
             catch (BusinessException e)
             {
-                return ReturnErrors(e);
-            }            
+                return RetornaErrosDesconhecidos(e);
+            }
         }
 
-        private Result<Usuario> ReturnErrors(BusinessException e)
+        private Result<Usuario> RetornaErrosDesconhecidos(BusinessException e)
         {
             result.Error = true;
             result.Message.Add(e.Message);
             result.Status = HttpStatusCode.InternalServerError;
+            return result;
+        }
+
+        private static ValidationResult ValidaEntrada(string login, string senha)
+        {
+            var validation = new UsuarioValidation();
+            var valido = validation.Validate(new Usuario { Login = login, Senha = senha });
+            return valido;
+        }
+
+        private static ValidationResult ValidaEntrada(Usuario usuario)
+        {
+            var validation = new UsuarioValidation();
+            var valido = validation.Validate(usuario);
+            return valido;
+        }
+
+        private Result<Usuario> RetornaNaoValido(ValidationResult valido)
+        {
+            result.Error = true;
+            result.Message.AddRange(valido.Errors.Select(x => x.ErrorMessage));
+            result.Status = HttpStatusCode.BadRequest;
+            return result;
+        }
+
+        private Result<Usuario> RetornaUsuarioNaoEncontrado()
+        {
+            result.Error = true;
+            result.Message.Add("Usuário não encontrado");
+            result.Status = HttpStatusCode.NotFound;
+            return result;
+        }
+
+        private Result<Usuario> RetornaSenhaInvalida()
+        {
+            result.Error = true;
+            result.Message.Add("Senha inválida");
+            result.Status = HttpStatusCode.BadRequest;
+            return result;
+        }
+
+        private Result<Usuario> RetornaOk()
+        {
+            result.Data = user;
+            result.Error = false;
+            result.Message.Add("Ok");
+            result.Status = HttpStatusCode.OK;
             return result;
         }
     }

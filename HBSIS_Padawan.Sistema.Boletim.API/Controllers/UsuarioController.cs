@@ -14,7 +14,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.API.Controllers
 
         [HttpPost]
         [Route("Conecta")]
-        public ActionResult Conectar(Usuario user) => Ok(usuario.Conectar(user.Login, user.Senha));        
+        public ActionResult Conectar(string login, string senha) => Ok(usuario.Conectar(login, senha));        
 
         [HttpPost]
         [Route("Cadastra")]
@@ -30,6 +30,6 @@ namespace HBSIS_Padawan.Sistema.Boletim.API.Controllers
 
         [HttpPut]
         [Route("AlteraLogin")]
-        public ActionResult AlteraLogin(string login, string novoLogin, string senha) => Ok(usuario.AlteraSenha(login, novoLogin, senha));
+        public ActionResult AlteraLogin(string login, string novoLogin, string senha) => Ok(usuario.AlterarLogin(login, novoLogin, senha));
     }
 }
