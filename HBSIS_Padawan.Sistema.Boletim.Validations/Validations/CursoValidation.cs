@@ -16,7 +16,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.Validations
 
             RuleFor(x => x.Situacao)
                 .NotEmpty().WithMessage("Situação do curso não foi informado")
-                .Must(x => x.Equals(Status.Ativo)).WithMessage("Cadastro permitido apenas para matérias com status 'Ativa'");
+                .Must(x => x.Equals(Status.Ativo)).WithMessage("Cadastro permitido apenas para cursos com status 'Ativa'");
 
             RuleForEach(x => x.CursoMaterias)
                 .NotEmpty().WithMessage("Informe uma disciplina para o curso")

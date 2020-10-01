@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace HBSIS_Padawan.Sistema.Boletim.API
@@ -26,6 +27,13 @@ namespace HBSIS_Padawan.Sistema.Boletim.API
         {
             services.AddControllers();
 
+            services.AddMvc()
+            .AddNewtonsoftJson(
+          options =>
+          {
+              options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+          });
+
             services.AddSwaggerGen(s =>
             {
                 s.SwaggerDoc("V1", new OpenApiInfo
@@ -39,6 +47,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.API
 
             services.AddTransient<IUser, UsuarioBusiness>();
             services.AddTransient<IMateria, MateriaBusiness>();
+            services.AddTransient<ICourse, CursoBusiness>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,11 +70,11 @@ namespace HBSIS_Padawan.Sistema.Boletim.API
             });
 
             app.UseSwagger();
-            app.UseSwaggerUI( s => 
-            {
-                s.SwaggerEndpoint("/swagger/V1/swagger.json", "HBSIS_Padawan Sistema Boletim");
-                s.DocExpansion(DocExpansion.None);
-            });
+            app.UseSwaggerUI(s =>
+           {
+               s.SwaggerEndpoint("/swagger/V1/swagger.json", "HBSIS_Padawan Sistema Boletim");
+               s.DocExpansion(DocExpansion.None);
+           });
         }
     }
 }

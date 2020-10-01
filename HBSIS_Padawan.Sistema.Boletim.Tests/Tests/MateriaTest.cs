@@ -17,7 +17,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.Tests
                 Nome = "Teste materia",
                 Descricao = "Teste valido",
                 Cadastro = new DateTime(2020, 01, 01),
-                Status = Status.Inativo              
+                Status = Status.Ativo              
             };
 
             var validation = new MateriaValidation();

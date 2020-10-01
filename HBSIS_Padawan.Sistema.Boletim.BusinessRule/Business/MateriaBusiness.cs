@@ -157,13 +157,8 @@ namespace HBSIS_Padawan.Sistema.Boletim.BusinessRule.Business
             return result;
         }
 
-        private static ValidationResult ValidaEntrada(Materia materia)
-        {
-            var validation = new MateriaValidation();
-            var valido = validation.Validate(materia);
-            return valido;
-        }
-
+        private static ValidationResult ValidaEntrada(Materia materia) => new MateriaValidation().Validate(materia);
+                    
         private Result<Materia> RetornaErrosDesconhecidos(BusinessException e)
         {
             result.Error = true;
