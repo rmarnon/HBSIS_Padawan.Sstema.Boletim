@@ -141,7 +141,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.Tests
             Usuario user = new Usuario
             {
                 Login = "Teste user",
-                Senha = "12345678910"             
+                Senha = "12345678910"          
             };
 
             var validation = new UsuarioValidation();

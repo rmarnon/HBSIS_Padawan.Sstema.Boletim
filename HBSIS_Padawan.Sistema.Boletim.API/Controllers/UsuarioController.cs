@@ -18,7 +18,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.API.Controllers
 
         [HttpPost]
         [Route("Cadastra")]
-        public ActionResult Cadastrar(Usuario user) => Ok(usuario.Cadastrar(user.Login, user.Senha, user.Tipo));        
+        public ActionResult Cadastrar(Usuario user) => Ok(usuario.Cadastrar(user));        
 
         [HttpDelete]
         [Route("Deleta")]
@@ -26,10 +26,12 @@ namespace HBSIS_Padawan.Sistema.Boletim.API.Controllers
 
         [HttpPut]
         [Route("AlteraSenha")]
-        public ActionResult AlteraSenha(string login, string senha, string novaSenha) => Ok(usuario.AlteraSenha(login, senha, novaSenha));
+        public ActionResult AlteraSenha(string login, string senha, string novaSenha) 
+            => Ok(usuario.AlteraSenha(login, senha, novaSenha));
 
         [HttpPut]
         [Route("AlteraLogin")]
-        public ActionResult AlteraLogin(string login, string novoLogin, string senha) => Ok(usuario.AlterarLogin(login, novoLogin, senha));
+        public ActionResult AlteraLogin(string login, string novoLogin, string senha) 
+            => Ok(usuario.AlterarLogin(login, novoLogin, senha));
     }
 }

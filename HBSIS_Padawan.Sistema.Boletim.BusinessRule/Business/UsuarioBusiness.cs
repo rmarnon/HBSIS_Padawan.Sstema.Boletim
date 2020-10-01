@@ -11,13 +11,13 @@ using System.Net;
 
 namespace HBSIS_Padawan.Sistema.Boletim.BusinessRule
 {
-    public class UsuarioBusinessRule : IUser
+    public class UsuarioBusiness : IUser
     {
         private readonly ApplicationContext db;
         Result<Usuario> result = new Result<Usuario>();
         Usuario user = new Usuario();
 
-        public UsuarioBusinessRule(ApplicationContext context) => db = context;
+        public UsuarioBusiness(ApplicationContext context) => db = context;
 
         public Result<Usuario> AlterarLogin(string login, string novoLogin, string senha)
         {
@@ -41,7 +41,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.BusinessRule
                     user.Login = novoLogin;
                     db.SaveChanges();
 
-                    return RetornaOk();
+                    return RetornaOk(user);
                 }
             }
             catch (BusinessException e)
@@ -72,7 +72,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.BusinessRule
                     user.Senha = novaSenha;
                     db.SaveChanges();
 
-                    return RetornaOk();
+                    return RetornaOk(user);
                 }
             }
             catch (BusinessException e)
@@ -81,14 +81,10 @@ namespace HBSIS_Padawan.Sistema.Boletim.BusinessRule
             }
         }
 
-        public Result<Usuario> Cadastrar(string login, string senha, TipoUsuario tipo)
+        public Result<Usuario> Cadastrar(Usuario user)
         {
             try
             {
-                user.Login = login;
-                user.Senha = senha;
-                user.Tipo = tipo;
-
                 var valido = ValidaEntrada(user);
 
                 if (!valido.IsValid)
@@ -98,7 +94,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.BusinessRule
                 {
                     foreach (var usuario in db.Usuarios)
                     {
-                        if (usuario.Login == login)
+                        if (usuario.Login == user.Login)
                         {
                             result.Error = true;
                             result.Message.Add("Usuário já está cadastrado");
@@ -106,11 +102,11 @@ namespace HBSIS_Padawan.Sistema.Boletim.BusinessRule
                             return result;
                         }
                     }
-
+                                        
                     db.Usuarios.Add(user);
                     db.SaveChanges();
 
-                    return RetornaOk();
+                    return RetornaOk(user);
                 }
             }
             catch (BusinessException e)
@@ -138,7 +134,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.BusinessRule
                     if (user.Senha != senha)
                         return RetornaSenhaInvalida();
 
-                    return RetornaOk();
+                    return RetornaOk(user);
                 }
             }
             catch (BusinessException e)
@@ -169,7 +165,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.BusinessRule
                     db.Usuarios.Remove(user);
                     db.SaveChanges();
 
-                    return RetornaOk();
+                    return RetornaOk(user);
                 }
             }
             catch (BusinessException e)
@@ -212,7 +208,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.BusinessRule
             return result;
         }
 
-        private Result<Usuario> RetornaOk()
+        private Result<Usuario> RetornaOk(Usuario user)
         {
             result.Data = user;
             result.Error = false;

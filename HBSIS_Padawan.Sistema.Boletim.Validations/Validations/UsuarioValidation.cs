@@ -18,8 +18,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.Validations
                         
             RuleFor(x => x.Tipo)
             .IsInEnum().WithMessage("Tipo do usuário informado é inválido")            
-            .When(x => x.Tipo is TipoUsuario && x.Tipo > 0);
-
+            .When(x => x.Tipo is TipoUsuario);
         }
     }
 }
