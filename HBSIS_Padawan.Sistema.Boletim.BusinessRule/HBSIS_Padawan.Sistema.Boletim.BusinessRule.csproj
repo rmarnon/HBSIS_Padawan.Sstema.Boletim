@@ -10,9 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HBSIS_Padawan.Sistema.Boletim.Models\HBSIS_Padawan.Sistema.Boletim.Models.csproj" />
-    <ProjectReference Include="..\HBSIS_Padawan.Sistema.Boletim.Repositories\HBSIS_Padawan.Sistema.Boletim.Repositories.csproj" />
     <ProjectReference Include="..\HBSIS_Padawan.Sistema.Boletim.Util\HBSIS_Padawan.Sistema.Boletim.Util.csproj" />
-    <ProjectReference Include="..\HBSIS_Padawan.Sistema.Boletim.Validations\HBSIS_Padawan.Sistema.Boletim.Validations.csproj" />
   </ItemGroup>
 
 </Project>

@@ -8,7 +8,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.BusinessRule.Interfaces
     {
         Result<Curso> Cadastar(Curso curso);
         Result<Curso> AlteraSituacao(string curso, Status status);
-        Result<Curso> CadastraMateria(string curso, string materia);
+        Result<Curso> VinculaMateria(string curso, string materia);
         Result<Curso> Excluir(string nome);
     }
 }

@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HBSIS_Padawan.Sistema.Boletim.Models\HBSIS_Padawan.Sistema.Boletim.Models.csproj" />
+    <ProjectReference Include="..\HBSIS_Padawan.Sistema.Boletim.Validations\HBSIS_Padawan.Sistema.Boletim.Validations.csproj" />
   </ItemGroup>
 
 </Project>

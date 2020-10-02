@@ -1,11 +1,9 @@
-﻿using FluentValidation.Results;
-using HBSIS_Padawan.Sistema.Boletim.BusinessRule.Exceptions;
+﻿using HBSIS_Padawan.Sistema.Boletim.BusinessRule.Exceptions;
 using HBSIS_Padawan.Sistema.Boletim.BusinessRule.Interfaces;
 using HBSIS_Padawan.Sistema.Boletim.Models;
 using HBSIS_Padawan.Sistema.Boletim.Models.Enums;
 using HBSIS_Padawan.Sistema.Boletim.Repositories.Data;
 using HBSIS_Padawan.Sistema.Boletim.Util;
-using HBSIS_Padawan.Sistema.Boletim.Validations;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -25,7 +23,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.BusinessRule.Business
         {
             try
             {
-                var valido = ValidaEntrada(new Materia
+                var valido = Retorno.ValidaEntrada(new Materia
                 {
                     Nome = novoNome,
                     Descricao = descricao,
@@ -34,21 +32,21 @@ namespace HBSIS_Padawan.Sistema.Boletim.BusinessRule.Business
                 });
 
                 if (!valido.IsValid)
-                    return RetornaNãoValido(valido);
+                    return Retorno.NãoValidaMateria(valido);
 
                 using (db)
                 {
                     materia = db.Materias.FirstOrDefault(x => x.Nome == nome);
 
                     if (materia is null)
-                        return RetornaMateriaNaoEncontrada();
+                        return Retorno.NaoEncontradaMateria();
 
                     materia.Nome = novoNome;
                     materia.Descricao = descricao;
 
                     db.SaveChanges();
 
-                    return RetornaOk(materia);
+                    return Retorno.Ok(materia);
                 }
             }
             catch (BusinessException e)
@@ -66,9 +64,9 @@ namespace HBSIS_Padawan.Sistema.Boletim.BusinessRule.Business
                     materia = db.Materias.FirstOrDefault(x => x.Nome == nome);
 
                     if (materia is null)
-                        return RetornaMateriaNaoEncontrada();
+                        return Retorno.NaoEncontradaMateria();
 
-                    var valido = ValidaEntrada(new Materia
+                    var valido = Retorno.ValidaEntrada(new Materia
                     {
                         Nome = nome,
                         Descricao = materia.Descricao,
@@ -77,13 +75,13 @@ namespace HBSIS_Padawan.Sistema.Boletim.BusinessRule.Business
                     });
 
                     if (!valido.IsValid)
-                        return RetornaNãoValido(valido);
+                        return Retorno.NãoValidaMateria(valido);
 
                     materia.Status = status;
 
                     db.SaveChanges();
 
-                    return RetornaOk(materia);
+                    return Retorno.Ok(materia);
                 }
             }
             catch (BusinessException e)
@@ -96,10 +94,10 @@ namespace HBSIS_Padawan.Sistema.Boletim.BusinessRule.Business
         {
             try
             {
-                var valido = ValidaEntrada(materia);
+                var valido = Retorno.ValidaEntrada(materia);
 
                 if (!valido.IsValid)
-                    return RetornaNãoValido(valido);
+                    return Retorno.NãoValidaMateria(valido);
 
                 using (db)
                 {
@@ -117,7 +115,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.BusinessRule.Business
                     db.Entry(materia).State = EntityState.Added;
                     db.SaveChanges();
 
-                    return RetornaOk(materia);
+                    return Retorno.Ok(materia);
                 }
             }
             catch (BusinessException e)
@@ -135,12 +133,12 @@ namespace HBSIS_Padawan.Sistema.Boletim.BusinessRule.Business
                     materia = db.Materias.FirstOrDefault(x => x.Nome == nome);
 
                     if (materia is null)
-                        return RetornaMateriaNaoEncontrada();
+                        return Retorno.NaoEncontradaMateria();
 
                     db.Materias.Remove(materia);
                     db.SaveChanges();
 
-                    return RetornaOk(materia);
+                    return Retorno.Ok(materia);
                 }
             }
             catch (BusinessException e)
@@ -148,39 +146,12 @@ namespace HBSIS_Padawan.Sistema.Boletim.BusinessRule.Business
                 return RetornaErrosDesconhecidos(e);
             }
         }
-
-        private Result<Materia> RetornaMateriaNaoEncontrada()
-        {
-            result.Error = true;
-            result.Message.Add("Matéria não está cadastrada");
-            result.Status = HttpStatusCode.NotFound;
-            return result;
-        }
-
-        private static ValidationResult ValidaEntrada(Materia materia) => new MateriaValidation().Validate(materia);
-                    
+                            
         private Result<Materia> RetornaErrosDesconhecidos(BusinessException e)
         {
             result.Error = true;
             result.Message.Add(e.Message);
             result.Status = HttpStatusCode.InternalServerError;
-            return result;
-        }
-
-        private Result<Materia> RetornaOk(Materia materia)
-        {
-            result.Data = materia;
-            result.Error = false;
-            result.Message.Add("Ok");
-            result.Status = HttpStatusCode.OK;
-            return result;
-        }
-
-        private Result<Materia> RetornaNãoValido(ValidationResult valido)
-        {
-            result.Error = true;
-            result.Message.AddRange(valido.Errors.Select(x => x.ErrorMessage));
-            result.Status = HttpStatusCode.BadRequest;
             return result;
         }
     }

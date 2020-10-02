@@ -48,6 +48,7 @@ namespace HBSIS_Padawan.Sistema.Boletim.API
             services.AddTransient<IUser, UsuarioBusiness>();
             services.AddTransient<IMateria, MateriaBusiness>();
             services.AddTransient<ICourse, CursoBusiness>();
+            services.AddTransient<IStudent, AlunoBusiness>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

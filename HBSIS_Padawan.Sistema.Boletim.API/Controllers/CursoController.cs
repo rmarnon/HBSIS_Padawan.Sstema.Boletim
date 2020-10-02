@@ -22,9 +22,9 @@ namespace HBSIS_Padawan.Sistema.Boletim.API.Controllers
         public ActionResult AlteraSituacao(string nome, Status situacao) => Ok(curso.AlteraSituacao(nome, situacao));
 
         [HttpPut]
-        [Route("cadastraMateria")]
-        public ActionResult CadastraMateria(string nomeCurso, string nomeMateria) 
-            => Ok(curso.CadastraMateria(nomeCurso, nomeMateria));
+        [Route("VinculaMateria")]
+        public ActionResult VinculaMateria(string nomeCurso, string nomeMateria) 
+            => Ok(curso.VinculaMateria(nomeCurso, nomeMateria));
 
         [HttpDelete]
         [Route("Deleta")]
